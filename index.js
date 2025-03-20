@@ -1,9 +1,21 @@
-const gridContainer = document.querySelector(".grid-container");
+const gameContainer = document.querySelector(".game-container");
 let cards = [];
 let firstCard, secondCard;
-let lockBoard = false;
+let lockBoard = true;
 let tries = 0;
 let score = 0;
+
+//function for loading screen play button
+document.querySelector(".play-btn").addEventListener("click", function () {
+  document.querySelector(".game-screen").classList.remove("hidden");
+  document.querySelector(".loading-screen").style.display = "none";
+});
+
+//function for starting game and hiding instruction modal
+document.querySelector(".start-btn").addEventListener("click", function () {
+  document.querySelector(".instruct-modal").classList.add("hidden");
+  lockBoard = false;
+});
 
 //tries variable assigned as text of tries class
 document.querySelector(".tries").textContent = tries;
@@ -52,7 +64,7 @@ function generateCards() {
         </div>
         <div class="back"></div>`;
     //display the generated card to the grid container in the game
-    gridContainer.appendChild(cardElement);
+    gameContainer.appendChild(cardElement);
     //assigning a function to react to a click
     cardElement.addEventListener("click", flipCard);
   }
@@ -125,6 +137,6 @@ function restart() {
   score = 0;
   document.querySelector(".tries").textContent = tries;
   document.querySelector(".score").textContent = score;
-  gridContainer.innerHTML = "";
+  gameContainer.innerHTML = "";
   generateCards();
 }
