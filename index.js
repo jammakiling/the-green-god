@@ -4,6 +4,8 @@ let firstCard, secondCard;
 let lockBoard = true;
 let tries = 0;
 let score = 0;
+let timeLeft = 60;
+let timeInterval;
 
 //function for loading screen play button
 document.querySelector(".play-btn").addEventListener("click", function () {
@@ -15,6 +17,7 @@ document.querySelector(".play-btn").addEventListener("click", function () {
 document.querySelector(".start-btn").addEventListener("click", function () {
   document.querySelector(".instruct-modal").classList.add("hidden");
   lockBoard = false;
+  startTimer();
 });
 
 //tries variable assigned as text of tries class
@@ -135,8 +138,28 @@ function restart() {
   shuffleCards();
   tries = 0;
   score = 0;
+  timeLeft = 60;
   document.querySelector(".tries").textContent = tries;
   document.querySelector(".score").textContent = score;
   gameContainer.innerHTML = "";
   generateCards();
+  startTimer();
+}
+
+//add timer
+
+function startTimer() {
+  timeInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--;
+      document.querySelector(".timer").textContent = `00:${
+        timeLeft < 10 ? "0" : ""
+      }${timeLeft} `;
+    } else {
+      clearInterval(timeInterval);
+      document.querySelector(".timer").textContent = "00:00 ";
+      alert("Time's up! Try again.");
+      lockBoard = true;
+    }
+  }, 1000);
 }
