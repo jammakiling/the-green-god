@@ -15,6 +15,7 @@ document.querySelector(".play-btn").addEventListener("click", function () {
 
 //function for starting game and hiding instruction modal
 document.querySelector(".start-btn").addEventListener("click", function () {
+  console.log("Start button clicked!");
   document.querySelector(".instruct-modal").classList.add("hidden");
   lockBoard = false;
   startTimer();
@@ -28,7 +29,26 @@ document.querySelector(".score").textContent = score;
 fetch("./data/cards.json")
   .then((res) => res.json())
   .then((data) => {
-    cards = [...data, ...data];
+    cards = [];
+
+    data.forEach((entry) => {
+      // Image card
+      cards.push({
+        type: "image",
+        name: entry.hex,
+        image: entry.image,
+        label: entry.name,
+      });
+
+      // Label card
+      cards.push({
+        type: "label",
+        name: entry.hex,
+        hex: entry.hex,
+        label: entry.name,
+      });
+    });
+
     shuffleCards();
     generateCards();
   });
@@ -62,10 +82,14 @@ function generateCards() {
     cardElement.setAttribute("data-name", card.name);
     //makeinnerhtml for that div
     cardElement.innerHTML = `
-        <div class ="front">
-            <img class="front-image" src=${card.image} />
-        </div>
-        <div class="back"></div>`;
+    <div class="front">
+      ${
+        card.type === "image"
+          ? `<img class="front-image" src="${card.image}" alt="${card.label}"/>`
+          : `<div class="front-hex funnel-sans">${card.hex}</div>`
+      }
+    </div>
+    <div class="back"></div>`;
     //display the generated card to the grid container in the game
     gameContainer.appendChild(cardElement);
     //assigning a function to react to a click
@@ -113,6 +137,10 @@ function disableCards() {
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
 
+  if (score === cards.length / 2) {
+    winGame();
+  }
+
   //resetvariables
 
   resetBoard();
@@ -129,11 +157,16 @@ function unflipCards() {
 
 function resetBoard() {
   firstCard = null;
-  secondCArd = null;
-  lockBoard = false;
+  secondCard = null;
+  if (timeLeft > 0) {
+    lockBoard = false;
+  }
 }
 
 function restart() {
+  clearInterval(timeInterval);
+  gameContainer.classList.remove("disabled");
+  lockBoard = false;
   resetBoard();
   shuffleCards();
   tries = 0;
@@ -160,6 +193,13 @@ function startTimer() {
       document.querySelector(".timer").textContent = "00:00 ";
       alert("Time's up! Try again.");
       lockBoard = true;
+      gameContainer.classList.add("disabled");
     }
   }, 1000);
+}
+
+function winGame() {
+  clearInterval(timeInterval);
+  alert("Congrats!");
+  lockBoard = true;
 }

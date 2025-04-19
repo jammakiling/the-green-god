@@ -1,38 +1,47 @@
 [
   {
-    "image": "../assets/greens/1.png",
-    "name": "one"
+    "image": "../assets/greens/BRUNSWIK .png",
+    "name": "Brunswik Green",
+    "hex": "#1b4d3e"
   },
   {
-    "image": "../assets/greens/2.png",
-    "name": "two"
+    "image": "../assets/greens/DARKSEA.png",
+    "name": "Dark Sea Green",
+    "hex": "#8fbc8f"
   },
   {
-    "image": "../assets/greens/3.png",
-    "name": "three"
+    "image": "../assets/greens/EMERALD.png",
+    "name": "Emerald Green",
+    "hex": "#50C878"
   },
   {
-    "image": "../assets/greens/4.png",
-    "name": "four"
+    "image": "../assets/greens/FOREST.png",
+    "name": "Forest Green",
+    "hex": "#228B22"
   },
   {
-    "image": "../assets/greens/5.png",
-    "name": "pineapple"
+    "image": "../assets/greens/HUNTER .png",
+    "name": "Hunter Green",
+    "hex": "#0B4008"
   },
   {
-    "image": "../assets/greens/6.png",
-    "name": "strawberry"
+    "image": "../assets/greens/LIME.png",
+    "name": "Lime Green",
+    "hex": "#32CD32"
   },
   {
-    "image": "../assets/greens/7.png",
-    "name": "tomato"
+    "image": "../assets/greens/OLIVE .png",
+    "name": "Olive Green",
+    "hex": "#636B2F"
   },
   {
-    "image": "../assets/greens/8.png",
-    "name": "watermelon"
+    "image": "../assets/greens/SPEARMINT.png",
+    "name": "Spearmint Green",
+    "hex": "#45B08C"
   },
   {
-    "image": "../assets/greens/9.png",
-    "name": "cherries"
+    "image": "../assets/greens/XANADU.png",
+    "name": "Xandadu Green",
+    "hex": "#738678"
   }
 ]
